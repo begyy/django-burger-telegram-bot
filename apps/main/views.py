@@ -113,11 +113,12 @@ class Controler:
 
 
     def check_subcategory(self):
-        try:
-            get = SubCategory.objects.get(category__title=self.text)
-            return True
-        except SubCategory.DoesNotExist:
+
+        get = SubCategory.objects.filter(category__title=self.text)
+        if not get:
             return False
+        else:
+            return True
 
     def check_product(self):
         try:
