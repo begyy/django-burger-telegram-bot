@@ -529,6 +529,6 @@ def inline_search(inline_query):
     products_array = []
     products = Product.objects.all()
     for all in products:
-        inline = InlineQueryResultPhoto(all.pk, all.name, InputTextMessageContent(all.name),reply_markup=key)
+        inline = InlineQueryResultArticle(all.pk, all.name, InputTextMessageContent(all.name),reply_markup=key,hide_url=all.photo_url)
         products_array.append(inline)
     bot.answer_inline_query(inline_query.id, products_array)
