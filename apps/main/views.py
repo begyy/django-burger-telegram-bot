@@ -6,7 +6,7 @@ from apps.category.models import SubCategory,Category
 from apps.telegram_users.models import Telegram
 import telebot
 from telebot.types import ReplyKeyboardMarkup,ReplyKeyboardRemove,KeyboardButton,InlineKeyboardButton,\
-    InlineKeyboardMarkup,InlineQueryResultArticle,InputTextMessageContent
+    InlineKeyboardMarkup,InlineQueryResultArticle,InputTextMessageContent,InlineQueryResultPhoto
 
 from time import time
 bot = telebot.TeleBot('621225718:AAGLhFWrQ_tG7gQZrlyIhAzRpkP0kEf9vBE')
@@ -529,6 +529,6 @@ def inline_search(inline_query):
     products_array = []
     products = Product.objects.all()
     for all in products:
-        inline = InlineQueryResultArticle(all.pk, all.name, InputTextMessageContent(all.name),reply_markup=key,url=all.photo_url)
+        inline = InlineQueryResultPhoto(all.pk, all.name, InputTextMessageContent(all.name),reply_markup=key)
         products_array.append(inline)
     bot.answer_inline_query(inline_query.id, products_array)
